@@ -72,6 +72,9 @@
                                 <div class="down" id="downvote_comment" data-id="'.$reply['comment_id'].'" style="display: inline-block; cursor: pointer;">
                                     <i class="fa fa-thumbs-down"></i> '.$reply['downvotes'].'
                                 </div>
+                                <div id="update_comment" data-id="'.$reply['comment_id'].'" style="display: inline-block; cursor: pointer;">
+                                <button class="btn btn-primary">Edit Comment</button>
+                            </div>
                                 <span><i class="fa fa-clock-o"></i> Commented on: '.$reply['time'][0].' at '.$reply['time'][1].'</span>
                             </div>
                         </div>

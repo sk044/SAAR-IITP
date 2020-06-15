@@ -95,7 +95,7 @@
                                                 </button>
                                             </div>`);
                     }
-                })
+                });
                 });
                 $("#add_comment").on("click",function(){
                     let bodyval = $('#comment_body').val();
@@ -125,12 +125,47 @@
                         }
                     });
                 });
+
+
+                $("#update_comment").on("click",function(){
+                    let bodyval = $('#comment_body').val();
+                    let user_name = $('#user_name').val();
+                    let user_img = $('#user_img').val();
+                    let user_id = $('#user_id').val();
+                    let post_id = $_GET['q'];
+                    let comment_id = this.dataset.id;
+                    $('#comment_body').val('');
+                    $.ajax({
+                        type: "PUT",
+                        // url: "http://localhost/SAAR-Server/editComment.php",
+                        url: "./api/editComment.php",
+                        data: {
+                            "user_id": user_id,
+                            "user_name": user_name,
+                            "user_img": user_img,
+                            "post_id":$_GET['q'],
+                            'comment_id': comment_id ,
+                            "body": bodyval
+                        },
+                        success: function(data){
+                            data = JSON.parse(data);
+                            $('#msg').html(`<div class="alert alert-warning alert-dismissible fade show" style="position: fixed;top: 30px;left: 45%;z-index:10;" role="alert">
+                                                ${data['messages'][0]}
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>`);
+                        }
+                    });
+                });
+
+
             });
 
             function vote(post_id,user_id,upordown){
                 $.ajax({
                     type: "POST",
-                    // url: "http://localhost/SAAR-Server/postvote.php",
+                    // url: "http://localhost/SAAR-IITP/postvote.php",
                     url: "./api/postvote.php",
                     data: {
                         'post_id': post_id,
@@ -259,5 +294,7 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="jquery.min.js"></script>  
+	<script src="jquery-ui.js"></script>
     </body>
 </html>
